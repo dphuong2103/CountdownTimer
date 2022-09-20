@@ -35,7 +35,7 @@ $(document).ready(() => {
     if (!(inputHour.val() > 0)) {
       inputHour.val("00");
     } else if (inputHour.val() < 10) {
-      inputHour.val(`0${inputHour.val()}`);
+      inputHour.val(`0${Number(inputHour.val())}`);
     }
   });
 

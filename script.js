@@ -1,4 +1,4 @@
-let time = 0;
+let runningTime = 0;
 let runCountDown;
 let timeInput;
 $(document).ready(() => {
@@ -11,7 +11,8 @@ $(document).ready(() => {
   inputMinute.val("");
   inputSecond.val("");
   inputHour.val("");
-
+  let audio = $("#audio")[0];
+  audio.src = "assets/sounds/Softchime.mp3";
   let timeControl = [inputMinute, inputSecond];
 
   timeControl.forEach((input) => {
@@ -37,48 +38,59 @@ $(document).ready(() => {
       inputHour.val(`0${inputHour.val()}`);
     }
   });
+
   start.click(() => {
     if (runCountDown == undefined) {
       timeInput =
         inputHour.val() * 3600 + inputMinute.val() * 60 + inputSecond.val() * 1;
 
-      time =
+      runningTime =
         inputHour.val() * 3600 + inputMinute.val() * 60 + inputSecond.val() * 1;
-
+      if (runningTime == 0) {
+        return;
+      }
       runCountDown = setInterval(() => {
-        if (time < 0) {
+        if (runningTime < 0) {
           clearInterval(runCountDown);
+          audio.play();
           return;
         }
 
-        setTime(time);
-
-        time += -1;
+        setTime(runningTime);
+        runningTime += -1;
       }, 1000);
     }
   });
 
   pause.click(() => {
+    audio.pause();
     clearInterval(runCountDown);
     runCountDown = undefined;
   });
 
   reset.click(() => {
+    currentTimeInInput =
+      inputHour.val() * 3600 + inputMinute.val() * 60 + inputSecond.val() * 1;
     if (runCountDown) {
+      audio.pause();
+      audio.currentTime = 0;
       clearInterval(runCountDown);
       setTime(timeInput);
       runCountDown = undefined;
-    } else {
+    } else if (!runCountDown && currentTimeInInput == timeInput) {
       inputMinute.val("");
       inputSecond.val("");
       inputHour.val("");
-      resetCount = 0;
       document.title = `Countdown Timer`;
+      audio.currentTime = 0;
+    } else if (!runCountDown && currentTimeInInput != timeInput) {
+      setTime(timeInput);
+      audio.currentTime = 0;
     }
   });
 
   function setTime(time) {
-    if (time > 0) {
+    if (time >= 0) {
       inputHourVal = Math.floor(time / 3600);
 
       inputHour.val(inputHourVal < 10 ? `0${inputHourVal}` : inputHourVal);

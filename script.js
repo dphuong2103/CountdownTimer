@@ -34,6 +34,8 @@ $(document).ready(() => {
   inputHour.change(() => {
     if (!(inputHour.val() > 0)) {
       inputHour.val("00");
+    } else if (inputHour.val() < 10) {
+      inputHour.val(`0${inputHour.val()}`);
     }
   });
   start.click(() => {
@@ -63,7 +65,6 @@ $(document).ready(() => {
   });
 
   reset.click(() => {
-
     if (runCountDown) {
       clearInterval(runCountDown);
       setTime(timeInput);

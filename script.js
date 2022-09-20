@@ -37,29 +37,35 @@ $(document).ready(() => {
     }
   });
   start.click(() => {
-    timeInput =
-      inputHour.val() * 3600 + inputMinute.val() * 60 + inputSecond.val() * 1;
-    time =
-      inputHour.val() * 3600 + inputMinute.val() * 60 + inputSecond.val() * 1;
+    if (runCountDown == undefined) {
+      timeInput =
+        inputHour.val() * 3600 + inputMinute.val() * 60 + inputSecond.val() * 1;
 
-    runCountDown = setInterval(() => {
-      if (time < 0) {
-        clearInterval(runCountDown);
-        return;
-      }
-      setTime(time);
+      time =
+        inputHour.val() * 3600 + inputMinute.val() * 60 + inputSecond.val() * 1;
 
-      time += -1;
-    }, 1000);
+      runCountDown = setInterval(() => {
+        if (time < 0) {
+          clearInterval(runCountDown);
+          return;
+        }
+
+        setTime(time);
+
+        time += -1;
+      }, 1000);
+    }
   });
 
   pause.click(() => {
     clearInterval(runCountDown);
+    runCountDown = undefined;
   });
 
   reset.click(() => {
     clearInterval(runCountDown);
     setTime(timeInput);
+    runCountDown = undefined;
   });
 
   function setTime(time) {

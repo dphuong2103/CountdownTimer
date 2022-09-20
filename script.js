@@ -24,7 +24,6 @@ $(document).ready(() => {
           if (inputVal < 10) {
             input.val(`0${Number(inputVal)}`);
           }
-
         } else {
           input.val("00");
         }
@@ -64,18 +63,20 @@ $(document).ready(() => {
   });
 
   function setTime(time) {
-    inputHourVal = Math.floor(time / 3600);
+    if (time > 0) {
+      inputHourVal = Math.floor(time / 3600);
 
-    inputHour.val(inputHourVal < 10 ? `0${inputHourVal}` : inputHourVal);
+      inputHour.val(inputHourVal < 10 ? `0${inputHourVal}` : inputHourVal);
 
-    inputMinuteVal = Math.floor((time - inputHourVal * 3600) / 60);
-    inputMinute.val(
-      inputMinuteVal < 10 ? `0${inputMinuteVal}` : inputMinuteVal
-    );
+      inputMinuteVal = Math.floor((time - inputHourVal * 3600) / 60);
+      inputMinute.val(
+        inputMinuteVal < 10 ? `0${inputMinuteVal}` : inputMinuteVal
+      );
 
-    inputSecondVal = time - inputHourVal * 3600 - inputMinuteVal * 60;
-    inputSecond.val(
-      inputSecondVal < 10 ? `0${inputSecondVal}` : inputSecondVal
-    );
+      inputSecondVal = time - inputHourVal * 3600 - inputMinuteVal * 60;
+      inputSecond.val(
+        inputSecondVal < 10 ? `0${inputSecondVal}` : inputSecondVal
+      );
+    }
   }
 });

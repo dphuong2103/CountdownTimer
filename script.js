@@ -15,7 +15,6 @@ $(document).ready(() => {
   let timeControl = [inputMinute, inputSecond];
 
   timeControl.forEach((input) => {
-    console.log(input);
     input.on("change", () => {
       inputVal = input.val();
 
@@ -74,6 +73,7 @@ $(document).ready(() => {
       inputSecond.val("");
       inputHour.val("");
       resetCount = 0;
+      document.title = `Countdown Timer`;
     }
   });
 
@@ -92,6 +92,7 @@ $(document).ready(() => {
       inputSecond.val(
         inputSecondVal < 10 ? `0${inputSecondVal}` : inputSecondVal
       );
+      document.title = `${inputHour.val()}:${inputMinute.val()}:${inputSecond.val()} - Countdown Timer`;
     }
   }
 });

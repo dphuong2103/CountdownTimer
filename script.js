@@ -63,9 +63,17 @@ $(document).ready(() => {
   });
 
   reset.click(() => {
-    clearInterval(runCountDown);
-    setTime(timeInput);
-    runCountDown = undefined;
+
+    if (runCountDown) {
+      clearInterval(runCountDown);
+      setTime(timeInput);
+      runCountDown = undefined;
+    } else {
+      inputMinute.val("");
+      inputSecond.val("");
+      inputHour.val("");
+      resetCount = 0;
+    }
   });
 
   function setTime(time) {

@@ -1,0 +1,109 @@
+*,
+*::after,
+*::before {
+  margin: none;
+  padding: none;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+body {
+  border: none;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #202938;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.title h2 {
+  font-size: clamp(2.5rem, 5vw, 3rem);
+  text-align: center;
+  color: white;
+  user-select: none;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-shadow: 1px 1px 5px #ac99ff, -2px 1px 30px #7c5ada;
+  margin: 0;
+}
+
+.time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #111828;
+  width: min(38em, 95vw);
+  border-radius: 35px 0px;
+  padding: 2em;
+}
+
+.time > * {
+  text-align: center;
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: clamp(1.3em,2vw,2em);
+  font-weight: bold;
+  outline: none;
+}
+
+.time input {
+  width: 3em;
+}
+
+.time .colon {
+  width: 1em;
+}
+
+.button-container {
+  width: min(35em, 95%);
+}
+.buttons {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(3rem, 1fr));
+  gap: 2em;
+  justify-content: center;
+}
+
+.buttons .btn {
+  padding: 0.7em 1em;
+  border-radius: 30px;
+  background-color: #111828;
+  text-align: center;
+  font-weight: bolder;
+  user-select: none;
+  font-size: large;
+  width: 8em;
+  font-size: 1.3em;
+}
+
+.buttons .btn:hover {
+  cursor: pointer;
+}
+
+.buttons .start {
+  color: #a81846;
+}
+
+.buttons .pause {
+  color: #c7bb00;
+}
+
+.buttons .reset {
+  color: #12c245;
+}
+
+@media (min-width: 600px) {
+  .buttons {
+    grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
+  }
+}
